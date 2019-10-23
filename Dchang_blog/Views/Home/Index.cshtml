@@ -1,0 +1,73 @@
+﻿@using Dchang_blog.Models
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<BlogPost>
+
+
+
+
+<!-- breadcrumb start-->
+<div class="container">
+    <div class="title" style="background-image: url('../../Images/textbg.jpg');">Daniel Chang's<BR />BLOG</div>
+</div>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-2"></div>
+            <div class="col-md-8">
+                <div class="blog_left_sidebar">
+                    @foreach (var blogPost in Model.OrderByDescending(a => a.Created))
+                    {
+
+
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                @if (blogPost.ImagePath != null)
+                                {
+                                    <img class="card-img rounded-0" src="@blogPost.ImagePath" alt="">
+                                }
+                                <a href=@Url.Action("Details", "BlogPosts", new { slug = (string)blogPost.Slug }) class="blog_item_date">
+                                    <h3>@blogPost.Created.ToString("dd")</h3>
+                                    <p>@blogPost.Created.ToString("MMM yyyy")</p>
+                                </a>
+                            </div>
+
+                            <div class="blog_details posted">
+                                <a href=@Url.Action("Details", "BlogPosts", new { slug = (string)blogPost.Slug }) class="d-inline-block">
+                                    <h2>@blogPost.Title</h2>
+                                </a>
+                                <p>
+                                    <a href=@Url.Action("Details", "BlogPosts", new { slug = (string)blogPost.Slug })>
+                                        @blogPost.Abstract
+                                    </a>
+                                </p>
+                                <ul class="blog-info-link">
+                                    <li><a href="@Url.Action("About", "Home")"><i class="far fa-user"></i> Daniel Chang</a></li>
+                                    <li><a href="@Url.Action("Details", "BlogPosts",  new { slug = (string)blogPost.Slug })#tocomments"><i class="far fa-comments"></i> Comments</a></li>
+                                </ul>
+                            </div>
+                        </article>
+
+                    }
+
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-2"></div>
+            <div class="col-8">
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }))
+            </div>
+
+
+
+            <div class="col-2"></div>
+        </div>
+
+    </div>
+</section>
+<!--================Blog Area =================-->

@@ -1,0 +1,90 @@
+﻿@model Dchang_blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<!-- breadcrumb start-->
+<div class="container">
+    <div class="title" style="background-image: url('../../Images/textbg.jpg');">Daniel Chang's<BR />BLOG</div>
+    <div class="subtitle">@ViewBag.Title</div>
+</div>
+<!-- breadcrumb start-->
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Created)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Created)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Updated)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Updated)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Slug)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Slug)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Abstract)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Abstract)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.BlogPostBody)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BlogPostBody)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ImagePath)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ImagePath)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Published)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Published)
+    </dd>
+
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+

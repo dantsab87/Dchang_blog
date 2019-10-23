@@ -1,0 +1,108 @@
+﻿@using Dchang_blog.Models
+@model BlogPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<!-- breadcrumb start-->
+<div class="container">
+    <div class="title" style="background-image: url('@Model.ImagePath');">Daniel Chang's<BR>BLOG</div>
+
+</div>
+<!-- breadcrumb start-->
+
+
+<section class="blog_area">
+
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-md-8">
+
+                        <div class="container mt-3 headbox">@Model.Title</div>
+
+                        <div align="center"><img src="@Model.ImagePath" class="postimg"></div>
+
+                        <div class="container mt-3 headbox">
+                            <p>By: @Html.ActionLink("Daniel Chang", "About", "Home") on
+                            @Model.Created.ToString("MMM dd, yyyy")</p>
+                        </div>
+
+                        <div class="container mt-3 detposted">
+                            <div class="blog_details row">
+                                <p class="postbody">
+                                    @Html.Raw(Model.BlogPostBody)
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <p id="tocomments">
+                            <BR>
+                        </p>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div id="addComment">
+                                @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("BlogPostId", Model.Id)
+                                    <div class="row-12">
+                                        <div class="col-3"></div>
+                                        <div class="offset-1 col-md-6">
+                                            @Html.TextArea("CommentBody", new { rows = 5, cols = 70, placeholder = "Add Comment", id = "comadd" })
+                                        </div>
+                                        <div class="col-3"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="offset-3 col-md-6">
+                                            <button type="submit" class="btn btn-sm btn-dark">Add Comment</button>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        else
+                        {
+                            <p align="center">
+                                If you'd like to leave it a comment, @Html.ActionLink("please sign up", "Register", "Account", null, new { })! <BR>
+                                Already have an account? @Html.ActionLink("Login here", "Login", "Account", null, new { })
+                            </p>
+
+                        }
+
+                        <p><BR></p>
+
+                        @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+                        {
+                            <div class="container mt-3 compost">
+                                <div class="media">
+                                    <img src="~/Images/anonymous.png" class="align-self-start mr-3" style="width:60px">
+                                    <div class="media-body">
+                                        <p>@comment.Created.ToString("MM/dd/yyyy h:mm tt")</p>
+                                        <p><strong>@comment.Author.DisplayName</strong> says: </p>
+                                        <p>@comment.CommentBody</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+</section>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { slug = (string)Model.Slug }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+                        <p><BR></p>
+

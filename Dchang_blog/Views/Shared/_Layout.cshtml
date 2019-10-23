@@ -1,0 +1,302 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Daniel Chang | Blog</title>
+    <link rel="icon" href="~/Images/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS -->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <!-- owl carousel CSS -->
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+    <!-- themify CSS -->
+    <link href="~/Content/themify-icons.css" rel="stylesheet" />
+    <!-- flaticon CSS -->
+    <link href="~/Content/flaticon.css" rel="stylesheet" />
+    <!-- fontawesome CSS -->
+    <link href="~/Content/all.min.css" rel="stylesheet" />
+    <!-- magnific CSS -->
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/gijgo.min.css" rel="stylesheet" />
+    <!-- niceselect CSS -->
+    <link href="~/Content/nice-select.css" rel="stylesheet" />
+    <!-- slick CSS -->
+    <link href="~/Content/slick.css" rel="stylesheet" />
+    <!-- style CSS -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <!--style for PagedList-->
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
+    <!--title-->
+    <link href="~/Content/title.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #edf3ee;
+        }
+
+        .posted {
+            background-color: #f3fcf4;
+        }
+
+        .detposted {
+            background-color: #f3fcf4;
+            border-radius: 0px 0px 0px 30px;
+        }
+
+        .navbg {
+            background-color: #c1ccc2;
+        }
+
+        .compost {
+            background-color: #FFFFFF;
+            border-radius: 15px 15px 0px 30px;
+        }
+
+        #comadd {
+            background-color: #dbe7dc;
+        }
+
+        .titlepost {
+            text-shadow: 1px 1px 3px black;
+        }
+
+       
+        .postbody {
+            margin: -10px 5px 0 0;
+        }
+        .postimg {
+            margin: 15px 0 0 0;
+        }
+        .headbox {
+            
+            background-color: #f3fcf4;
+            margin: 3px;
+            display: block;
+            font-size: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 2px;
+            color: #000000;
+            opacity: 0.9;
+            text-shadow: 1px 1px 1px black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <!--::header part start::-->
+    <header class="main_menu">
+
+        <div class="main_menu_iner navbg">
+            <div class="container">
+                <div class="row align-items-center ">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+                            @*<a class="navbar-brand" href="/Home"> <img src="~/Images/logo.png" alt="logo"> </a>*@
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse main-menu-item justify-content-center"
+                                 id="navbarSupportedContent">
+                                <ul class="navbar-nav navbg">
+
+                                    <li class="nav-item">
+                                        <div class="nav-link">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="nav-link">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="nav-link">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</div>
+                                    </li>
+
+                                    @* hide this link unless admin*@
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        if (User.IsInRole("Admin"))
+                                        {
+                                            <li class="nav-item">
+                                                <div class="nav-link">@Html.ActionLink("Create Post", "Create", "BlogPosts", null, new { @class = "nav-link" })</div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <div class="nav-link">@Html.ActionLink("View All Posts", "Index", "BlogPosts", null, new { @class = "nav-link" })</div>
+                                            </li>
+                                        }
+
+                                        <li class="nav-item">
+                                            <div class="nav-link">@Html.ActionLink("Log Out", "CustomLogOff", "Account", null, new { @class = "nav-link" })</div>
+                                        </li>
+                                    }
+                                    else
+                                    {
+
+                                        <li class="nav-item">
+                                            <div class="nav-link">@Html.ActionLink("Register", "Register", "Account", null, new { @class = "nav-link" })</div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <div class="nav-link">@Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link" })</div>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                            @*@Html.Partial("_LoginPartial")*@
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+    <!-- breadcrumb start-->
+    <!-- breadcrumb start-->
+    <!--================Blog Area =================-->
+    @RenderBody()
+    <!--================Blog Area =================-->
+    <!-- footer part start-->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-sm-6 col-md-5">
+                    @*<div class="single-footer-widget">
+                            <h4>Discover Destination</h4>
+                            <ul>
+                                <li><a href="#">Miami, USA</a></li>
+                                <li><a href="#">California, USA</a></li>
+                                <li><a href="#">London, UK</a></li>
+                                <li><a href="#">Saintmartine, Bangladesh</a></li>
+                                <li><a href="#">Mount Everast, India</a></li>
+                                <li><a href="#">Sidney, Australia</a></li>
+                                <li><a href="#">Miami, USA</a></li>
+                                <li><a href="#">California, USA</a></li>
+                                <li><a href="#">London, UK</a></li>
+                                <li><a href="#">Saintmartine, Bangladesh</a></li>
+                                <li><a href="#">Mount Everast, India</a></li>
+                                <li><a href="#">Sidney, Australia</a></li>
+                            </ul>
+
+                        </div>
+                </div>
+                <div class="col-sm-6 col-md-4">*@
+                    <div class="single-footer-widget">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+                        {
+                            <div class="tox-form__controls-h-stack controls-row search-row">
+                                <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
+                                <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
+                                    <i class="far fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        }
+
+                        @*<h4>Search</h4>
+        <div class="form-wrap" id="mc_embed_signup">
+            <form target="_blank"
+                  action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                  method="get" class="form-inline">
+                <input class="form-control" name="EMAIL" placeholder="Your Email Address"
+                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
+                       required="" type="email">
+                <button class="click-btn btn btn-default text-uppercase">
+                    <i class="far fa-paper-plane"></i>
+                </button>
+                <div style="position: absolute; left: -5000px;">
+                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                           type="text">
+                </div>
+
+                <div class="info"></div>
+            </form>
+        </div>*@
+                        <p></p>
+                    </div>
+                </div>
+                @*<div class="col-sm-6 col-md-3">
+                    <div class="single-footer-widget footer_icon">
+                        <h4>Contact Info:</h4>
+                        <p>
+                            1439 Highfield Ct<BR>
+                            Charlotte, North Carolina<BR>
+                            (704) 877-0741<BR>
+                        </p>
+                        <div class="social-icons">
+                            <a href="#"><i class="ti-facebook"></i></a>
+                            <a href="#"><i class="ti-twitter-alt"></i></a>
+                            <a href="#"><i class="ti-pinterest"></i></a>
+                            <a href="#"><i class="ti-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="copyright_part_text text-center">
+                        <p class="footer-text m-0">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>. <BR>
+                            Modified by <a href="https://danielchangportfolio.azurewebsites.net/">Daniel Chang</a>.
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer part end-->
+    <!-- jquery plugins here-->
+    <script src="~/Scripts/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/Scripts/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- magnific js -->
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <!-- masonry js -->
+    <script src="~/Scripts/masonry.pkgd.js"></script>
+    <!-- masonry js -->
+    <script src="~/Scripts/jquery.nice-select.min.js"></script>
+    <script src="~/Scripts/gijgo.min.js"></script>
+
+    <!-- contact js -->
+    <script src="~/Scripts/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/mail-script.js"></script>
+    <script src="~/Scripts/contact.js"></script>
+    <!-- custom js -->
+    <script src="~/Scripts/custom.js"></script>
+    <!--title script-->
+    <script src="~/Scripts/title.js"></script>
+    <!--tiny MCE-->
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script typeof="text/javascript">
+        $(function () {
+            tinymce.init({
+                selector: '#BlogPostBody'
+            });
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
